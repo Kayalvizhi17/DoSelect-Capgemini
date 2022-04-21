@@ -1,0 +1,107 @@
+// Complete the class Student using the Specifications given below. Consider default visibility of classes, data fields, and methods unless mentioned otherwise.
+// Specifications
+// class definition:
+//   class Student:
+//     data field:
+//         HashMap<String,String> dataList
+//     method definitions:
+//       addStudentDetails(String name, String id):
+//          return type: String  
+
+//       deleteId(String name):
+//          return type: String
+
+//       searchId(String name):
+//          return type: String
+// Task
+// Class Student
+// - define the HashMap<String, String> variable dataList.
+// 	Keys- String -> name
+// 	Values- String -> id
+// Implement the below methods for this class:
+// -String addStudentDetails(String name, String id):
+// 	Write a code to add students detail to the map.
+// 	If the name is already present in the map then return "Id generation Failed, name is already present in the database".
+// 	If the name is not there in the map then add data in map and return "Id Generated".
+// -String deleteId(String name):
+// 	Write a code to delete the student detail from the map.
+// 	If the student name is not found in the map then return "Id not found".
+// 	If the student name is present in the map then delete the student details and return "Id deleted successfully".
+// -String searchId(String name):
+// 	Write a code to search the student id from the map.
+// 	If the student's name isn't found in the map then return "Id not found".
+// 	If the student's name is present in the map then delete the student details and return id.
+// Sample Input
+// s1 = obj.addStudentDetails("Sarah","99889");
+// s2 = obj.addStudentDetails("John","78985");
+// s3 = obj.deleteId("Sarah");
+// s4 = obj.searchId("Steve");
+// Sample Output
+// "Id Generated"
+// "Id Generated"
+// "Id deleted successfully"
+// "Id not found"
+// NOTE:
+// 	You can make suitable function calls and use the RUN CODE button to check your main() method output.
+
+import java.util.*;
+import java.io.*; 
+class Student
+{
+    HashMap<String,String> dataList =new HashMap<>();
+    public String addStudentDetails(String name,String id)
+      {
+          if(dataList.containsValue(name))
+          {
+              System.out.println("Id generation Failed,name is already present in the database");
+          }
+          else
+          {
+              dataList.put(name,id);
+              System.out.println("Id generated");
+          }
+          return null;
+         
+      }
+      public String deleteId(String name)
+       {
+           if(dataList.containsValue(name))
+           {
+            dataList.remove(name);
+            System.out.println("Id deleted successfully");
+           }
+           else{
+            System.out.println("Id not found");
+           }
+           return null;
+       } 
+       public String searchId(String name)
+       {
+        if(dataList.containsKey(name))
+           {
+            
+         System.out.println(dataList.get(name));
+         dataList.remove(name);
+           }
+      
+        else
+        {
+            System.out.println("Id not found");
+        }
+        return null;
+       } 
+}
+
+public class Main 
+    {
+    public static void main(String args[])
+    {
+        Student obj=new Student();
+        String s1=obj.addStudentDetails("Sarah","99889");
+        String s2=obj.addStudentDetails("John","78985");
+        String s3=obj.deleteId("Sarah");
+        String s4=obj.searchId("Steve");
+        String s5=obj.searchId("John");
+        
+    }
+    }
