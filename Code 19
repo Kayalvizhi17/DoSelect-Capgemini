@@ -1,0 +1,125 @@
+// Q19
+
+// Complete the classes using the Specifications given below. Consider default visibility of classes, data fields, and methods unless mentioned otherwise.
+// Specifications
+// class definitions:
+//  class Cue:
+//     data members: 
+//         int pieces
+//         boolean retain
+//     Cue(int pieces, boolean retain): constructor with public visibility
+
+// class Retention:
+//     Cue(Cue c): constructor with public visibility
+//  data members:
+//     Cue cue=null
+//  method definitions:
+//      checkCue(int p) throws Exception:     
+//         return type: String
+//         visibility: public     
+
+//      playGame(int p) throws Exception:
+//         return type: String
+//         visibility: public   
+
+//  class CueException extends Exception:
+//   method definitions:
+//       CueException(String msg)
+//          visibility: public  
+// Task
+// Class Cue
+// - define the int variable pieces.
+// - define the boolean variable retain
+// -define a constructor according to the above specifications.
+// Class Retention
+// Define the class according to the above specififcations and Implement the below methods for this class:
+// -String checkCue(int p) throws Exception:
+// 	Write a code to validate the criteria for getting the award.
+// 	throw a CueException if retain is false with the message "Cue not retained".
+// 	throw a CueException if p is less than pieces of cue variable with the message "More pieces required".
+// 	throw a CueException if p is greater than pieces of cue variable with the message "Update required".
+// 	If no above exception is found then return a string message "Cue updated".
+// -String playGame(int p) throws Exception:
+// 	Write a code to play the game using the mentioned cue.
+// 	If checkCue() method throws a CueException then returns a message "Cannot use this cue".(Use try-catch block)
+// 	If it throws any other exception then return a message "Other exception".
+// 	If no exception is found then return a message "Welcome to the game".
+// class CueException extends Exception
+// 	Define CueException class derived from Exception class
+// Sample Input
+// Cue c=new Cue(13,true);
+// Retention r= new Retention(c);
+// String ans = r.playGame(5);
+// Sample Output
+// cannot use this cue
+// NOTE:
+// 	You can make suitable function calls and use the RUN CODE button to check your main() method output.
+
+
+
+
+
+//Cue.java
+
+class Cue{
+int pieces;
+boolean retain;
+public Cue(int pieces,boolean retain){
+this.pieces=pieces;
+this.retain= retain;
+}
+}
+
+//Retention.java
+class Retention{
+Cue cue = null;
+public Retention(Cue c){
+this.cue=c;
+}
+
+public String checkCue(int p) throws Exception{
+if(cue.retain==false){
+throw new CueException("Cue not retained");
+}
+else if(p<cue.pieces){
+throw new CueException("More pieces required");
+}
+else if(p>cue.pieces){
+throw new CueException("Update required");
+}
+else{
+return "Cue updated";
+}
+}
+
+
+public String playGame(int p) throws Exception{
+try{
+   checkCue(p);
+   return "Welcome to the game";
+}
+catch (CueException e1){
+    return "Cannot use this cue";
+}
+catch (Exception e2){
+    return "Other exception";
+}
+}
+}
+
+
+//CueException.java
+class CueException extends Exception{
+public CueException(String msg){
+System.out.println(msg);
+}
+}
+
+//CheckCue.java
+public class CheckCue{
+public static void main(String[] args)throws Exception{
+Cue c=new Cue(13,true);
+Retention r= new Retention(c);
+String ans = r.playGame(5);
+}
+}
