@@ -1,0 +1,64 @@
+[4:40 pm, 22/04/2022] Kayal Vizhi 3: package com.DoSelect;
+
+
+public class Student {
+	
+	String name;
+	int roll_no;
+	Student(String name,int roll_no)
+	{
+		this.name=name;
+		this.roll_no=roll_no;
+	}
+	public String getName()
+	{
+		return this.name;
+	}
+	public void setName(String name)
+	{
+		this.name=name;
+	}
+	public int getRollno()
+	{
+		return this.roll_no;
+	}
+	public void setRollno(int roll_no)
+	{
+		this.roll_no=roll_no;
+	}
+}
+[4:40 pm, 22/04/2022] Kayal Vizhi 3: class Record 
+{
+	List<Student> students;
+	
+	public String addstudent(Student students)
+	 {
+		 boolean result = (students.getName()).matches("[a-zA-Z]+");
+		 if(result)
+		 {
+			return "Added";
+		 }
+		else
+		{ 
+			return "Invalid name";
+		}
+		
+	 }
+	public String swapRolls(Student s1, Student s2)
+	{
+		 Student temp = s1;
+	        s1 = s2;
+	        s2 = temp;
+	        
+	        return "Swapped";
+	}
+	public static void main(String[]args)
+	{
+		Student s1 = new Student("Divya",2);
+		Record record =new Record();
+		System.out.println(record.addstudent(s1));
+		
+	}
+	
+
+}
