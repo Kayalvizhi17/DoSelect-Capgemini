@@ -1,0 +1,90 @@
+package com.DoSelect;
+public class MatchException extends Exception
+{
+	private static final long serialVersionUID = 1L;
+	public String msg;
+	MatchException(String msg)
+	{   super();
+		this.msg=msg;
+	}
+ }
+ class Player {
+ 
+	int requriedRuns;
+	String summary;
+	Player(int r,String s)
+	{
+		this.requriedRuns=r;
+		this.summary=s;
+	}
+	public int getrequiredRuns()
+	{
+		return this.requriedRuns;
+	}
+	public int setrequriedRuns(int requriedRuns )
+	{
+		return this.requriedRuns=requriedRuns;
+	}
+	public String getSummary()
+	{
+		return this.summary;
+	}
+	public void setSummmary(String summary)
+	{
+		this.summary=summary;
+	}
+	
+}
+public class Match {
+ 
+	public String checkTarget(Player player) throws Exception
+	{
+		boolean value = player.summary.contains("w");
+		String name = player.summary;
+		int sum=0;
+		   for (int i = 0; i < name.length(); i++) {
+		      if(Character.isDigit(name.charAt(i))) 
+		      sum=sum+Character.getNumericValue(name.charAt(i));
+		      }
+		if(value == true )
+		{
+			throw new MatchException("Out");
+		}
+		else if(sum <(player.requriedRuns))
+		{
+			throw new MatchException("Lost by Runs");
+		}
+		else
+		{
+			return "We may win";
+		}
+	}
+	public String results(Player player) throws Exception
+	{
+		try
+		{
+			checkTarget( player);
+		}
+		catch (MatchException m)
+		{
+			return "We Lost Match";
+		}
+		catch(Exception e)
+		{
+			return "Other Exception";
+		}
+		return "We won";
+		
+		
+	}
+	public static void main(String[]args) throws Exception
+	{
+		Player p=new Player(12,"123461");
+		Match m=new Match();
+		System.out.println(m.checkTarget(p));
+		System.out.println(m.results(p));
+		
+
+	}
+
+}
