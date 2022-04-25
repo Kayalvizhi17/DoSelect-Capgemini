@@ -1,0 +1,50 @@
+import java.util.*;
+
+class Material{
+	public int mass;
+	public int temp;
+	
+	public Material(int mass,int temp){
+		this.mass=mass;
+		this.temp=temp;
+	}
+	public String flowOfHeat() throws Exception{
+		try{
+			checkMaterial();
+		}
+		catch(MaterialException e1){
+			return "Invalid Material";
+		}
+		catch(Exception e2){
+			return "Other Exception";
+		}
+		return "Both in equilibrium";
+	}
+	public String checkMaterial() throws Exception{
+		if(mass<0){
+			throw new MaterialException("Mass cannot be negative");
+		}
+		else if(mass==0){
+			throw new MaterialException("Mass cannot be zero");
+		}
+		else{
+			return "Valid material";
+		}
+	}
+}
+
+class MaterialException extends Exception{
+	public MaterialException(String msg){
+		super(msg);
+	}
+}
+
+public class Assignment{
+	public static void main(String args[]) throws Exception{
+		Material m=new Material(12,32);
+		String s=m.flowOfHeat();
+		String s1=m.checkMaterial();
+		System.out.println(s);
+		System.out.println(s1);
+	}
+}
