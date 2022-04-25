@@ -1,0 +1,57 @@
+class Product{
+	String name;
+	double price;
+	String coupon;
+	
+	public Product(String name,double price,String coupon){
+		this.name=name;
+		this.price=price;
+		this.coupon=coupon;
+	}
+}
+
+class Validator{
+	public String validateCoupon(Product p)throws Exception{
+	    String s[]=p.coupon.split("-");
+	    String d=s[1];
+	    int discount=Integer.parseInt(d);
+	    if((!p.coupon.contains("-")) || discount<10 || discount>25){
+			throw new InvalidCouponException("Invalid Coupon");
+		}
+		else{
+			return "Valid Coupon";
+		}	
+	}
+	public double netPrice(Product p)throws Exception{
+	    String s[]=p.coupon.split("-");
+	    String d=s[1];
+	    int discount=Integer.parseInt(d);
+	    double d1=(p.price*discount)/100;
+		double np=p.price-d1;
+		try{
+			validateCoupon(p);
+		}
+		catch(InvalidCouponException e1){
+			return p.price;
+		}
+		return np;
+	}
+}
+
+class InvalidCouponException extends Exception{
+	public InvalidCouponException(String msg){
+		super(msg);
+	}
+}
+public class Assignment{
+	public static void main(String args[]) throws Exception{
+		Product obj = new Product("IPhone",25000,"IPhone-10");
+		Validator val = new Validator();
+		String valCop = val.validateCoupon(obj);
+		double price = val.netPrice(obj);
+
+		System.out.println("valCop = "+valCop);
+		System.out.println("price = "+price);
+
+	}
+}
